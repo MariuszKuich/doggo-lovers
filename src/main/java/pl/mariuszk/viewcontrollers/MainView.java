@@ -9,7 +9,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.mariuszk.service.SecurityService;
+import pl.mariuszk.security.SecurityService;
 
 import javax.annotation.security.PermitAll;
 import java.util.Optional;

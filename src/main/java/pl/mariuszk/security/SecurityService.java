@@ -1,4 +1,4 @@
-package pl.mariuszk.service;
+package pl.mariuszk.security;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
