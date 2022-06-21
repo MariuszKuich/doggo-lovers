@@ -15,6 +15,6 @@ public class UserDto {
 	private String username;
 
 	@NotEmpty
-	@Length(min = 3, max = 20)
+	@Length(min = 8, max = 20)
 	private String password;
 }
