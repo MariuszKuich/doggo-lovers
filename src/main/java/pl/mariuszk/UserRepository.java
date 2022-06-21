@@ -1,7 +1,7 @@
 package pl.mariuszk;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.mariuszk.entity.UserEntity;
+import pl.mariuszk.model.entity.UserEntity;
 
 import java.util.Optional;
 

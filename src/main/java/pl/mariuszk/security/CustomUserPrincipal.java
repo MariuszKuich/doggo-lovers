@@ -3,7 +3,7 @@ package pl.mariuszk.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.mariuszk.entity.UserEntity;
+import pl.mariuszk.model.entity.UserEntity;
 
 import java.util.Collection;
 

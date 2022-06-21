@@ -1,4 +1,4 @@
-package pl.mariuszk.viewcontrollers;
+package pl.mariuszk.viewcontroller;
 
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
@@ -9,13 +9,13 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.mariuszk.security.SecurityService;
+import pl.mariuszk.service.security.SecurityService;
 
 import javax.annotation.security.PermitAll;
 import java.util.Optional;
 
 @Route("")
-@PageTitle("Welcome!")
+@PageTitle("Doggo Lovers")
 @PermitAll
 @Tag("main-view")
 @JsModule("./src/views/main-view.ts")
@@ -25,8 +25,6 @@ public class MainView extends LitTemplate {
 	private TextField lblUsername;
 	@Id("btnLogout")
 	private Button btnLogout;
-
-	private SecurityService securityService;
 
     public MainView(SecurityService securityService) {
 		Optional<UserDetails> loggedUser = Optional.ofNullable(securityService.getAuthenticatedUser());

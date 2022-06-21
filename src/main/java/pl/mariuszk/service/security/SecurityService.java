@@ -1,4 +1,4 @@
-package pl.mariuszk.security;
+package pl.mariuszk.service.security;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
+import static pl.mariuszk.enums.Route.LOG_IN;
+
 @Service
 public class SecurityService {
-
-	private static final String LOGOUT_SUCCESS_URL = "/login";
 
 	public UserDetails getAuthenticatedUser() {
 		SecurityContext context = SecurityContextHolder.getContext();
@@ -24,7 +24,7 @@ public class SecurityService {
 	}
 
 	public void logout() {
-		UI.getCurrent().getPage().setLocation(LOGOUT_SUCCESS_URL);
+		UI.getCurrent().navigate(LOG_IN.getUrl());
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 		logoutHandler.logout(VaadinServletRequest.getCurrent().getHttpServletRequest(), null, null);
 	}

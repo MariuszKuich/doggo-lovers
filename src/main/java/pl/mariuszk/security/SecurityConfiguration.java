@@ -11,7 +11,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.mariuszk.viewcontrollers.LoginView;
+import pl.mariuszk.service.security.CustomUserDetailsService;
+import pl.mariuszk.viewcontroller.LoginView;
 
 @EnableWebSecurity
 @Configuration
