@@ -17,11 +17,11 @@ export class SignInView extends LitElement {
 
   render() {
     return html`
-<vaadin-vertical-layout style="width: 100%; height: 100%; align-items: center; justify-content: center;">
+<vaadin-vertical-layout style="width: 100%; height: 100%; align-items: center; justify-content: flex-start;">
  <h1 style="align-self: center;">Sign in</h1>
- <vaadin-text-field label="Username" id="username" minlength="3" type="text" required maxlength="20"></vaadin-text-field>
- <vaadin-password-field id="password" minlength="8" type="password" required maxlength="20" label="Password" invalid></vaadin-password-field>
- <vaadin-password-field id="passwordConfirm" minlength="8" type="password" required maxlength="20" label="Confirm password"></vaadin-password-field>
+ <vaadin-text-field label="Username" id="username" type="text" required invalid></vaadin-text-field>
+ <vaadin-password-field id="password" type="password" required label="Password" invalid></vaadin-password-field>
+ <vaadin-password-field id="passwordConfirm" type="password" required label="Confirm password" invalid></vaadin-password-field>
  <vaadin-button theme="primary" id="btnSubmit" style="margin: var(--lumo-space-m);" tabindex="0">
    Sign in 
  </vaadin-button>

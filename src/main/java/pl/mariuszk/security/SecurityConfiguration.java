@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.mariuszk.service.security.CustomUserDetailsService;
 import pl.mariuszk.viewcontroller.LoginView;
 
+import static pl.mariuszk.enums.Route.LOG_IN;
+
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
 		setLoginView(http, LoginView.class);
+		http.oauth2Login().loginPage(LOG_IN.getUrl()).permitAll();
 	}
 
 	@Override

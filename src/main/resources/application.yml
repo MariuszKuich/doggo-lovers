@@ -18,6 +18,15 @@ spring:
     url: jdbc:postgresql://localhost:55000/DOGGO_LOVERS
     username: postgres
     password: postgrespw
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 1066355102789-o0a8rmjptilsoqhoijfmechqp9869rv2.apps.googleusercontent.com
+            clientSecret: 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
+          scope:
+            - email
 vaadin:
-  launch-browser: true
+  launch-browser: false
   whitelisted-packages: com.vaadin,org.vaadin,dev.hilla,com.example.application

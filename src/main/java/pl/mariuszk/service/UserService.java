@@ -3,7 +3,7 @@ package pl.mariuszk.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.mariuszk.UserRepository;
+import pl.mariuszk.repository.UserRepository;
 import pl.mariuszk.model.entity.UserEntity;
 import pl.mariuszk.model.frontend.UserDto;
 
@@ -29,5 +29,17 @@ public class UserService {
 
 	private boolean usernameExists(String username) {
 		return userRepository.findByUsername(username).isPresent();
+	}
+
+	public void registerNewOAuthUserIfNecessary(String username) {
+		if (usernameExists(username)) {
+			return;
+		}
+
+		UserEntity userEntity = UserEntity.builder()
+				.username(username)
+				.build();
+
+		userRepository.save(userEntity);
 	}
 }

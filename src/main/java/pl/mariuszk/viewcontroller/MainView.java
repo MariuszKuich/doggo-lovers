@@ -9,6 +9,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.mariuszk.security.CustomOAuthUserPrincipal;
+import pl.mariuszk.service.UserService;
 import pl.mariuszk.service.security.SecurityService;
 
 import javax.annotation.security.PermitAll;
@@ -26,13 +28,16 @@ public class MainView extends LitTemplate {
 	@Id("btnLogout")
 	private Button btnLogout;
 
-    public MainView(SecurityService securityService) {
+    public MainView(SecurityService securityService, UserService userService) {
 		Optional<UserDetails> loggedUser = Optional.ofNullable(securityService.getAuthenticatedUser());
 
+		loggedUser.ifPresent(lu -> {
+			if (lu instanceof CustomOAuthUserPrincipal) {
+				userService.registerNewOAuthUserIfNecessary(lu.getUsername());
+			}
+		});
 		loggedUser.ifPresent(lu -> lblUsername.setValue(lu.getUsername()));
 
-		btnLogout.addClickListener(e -> {
-			loggedUser.ifPresent(lu -> securityService.logout());
-		});
+		btnLogout.addClickListener(e -> loggedUser.ifPresent(lu -> securityService.logout()));
     }
 }

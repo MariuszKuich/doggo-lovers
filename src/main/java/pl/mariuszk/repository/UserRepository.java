@@ -1,4 +1,4 @@
-package pl.mariuszk;
+package pl.mariuszk.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.mariuszk.model.entity.UserEntity;

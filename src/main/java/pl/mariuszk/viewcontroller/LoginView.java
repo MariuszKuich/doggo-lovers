@@ -31,8 +31,6 @@ public class LoginView extends LitTemplate implements BeforeEnterObserver {
     private LoginForm loginForm;
 	@Id("btnSignIn")
 	private Button btnSignIn;
-	@Id("btnLogInGoogle")
-	private Button btnLogInGoogle;
 
 	private final NotificationService notificationService;
 
