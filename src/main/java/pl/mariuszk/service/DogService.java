@@ -20,4 +20,9 @@ public class DogService {
 	public Optional<DogEntity> findByOwnerId(Long userId) {
 		return dogRepository.findByOwnerId(userId);
 	}
+
+	public DogEntity findByOwnerIdOrThrow(Long userId) {
+		return dogRepository.findByOwnerId(userId)
+				.orElseThrow(() -> new IllegalStateException("Dog not found for user id: " + userId));
+	}
 }

@@ -10,6 +10,8 @@ import pl.mariuszk.security.CustomOAuthUserPrincipal;
 import pl.mariuszk.security.ICustomUserDetails;
 import pl.mariuszk.service.security.SecurityService;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -57,5 +59,9 @@ public class UserService {
 	public UserEntity getUserFromSecurityContext() {
 		ICustomUserDetails loggedUser = securityService.getAuthenticatedUser();
 		return getUserByUsername(loggedUser.getUsername());
+	}
+
+	public List<UserEntity> getAllUsersExcept(Long userId) {
+		return userRepository.findByIdNotOrderByName(userId);
 	}
 }
