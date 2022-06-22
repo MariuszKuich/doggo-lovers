@@ -2,7 +2,7 @@ package pl.mariuszk.enums;
 
 import lombok.Getter;
 
-public enum OAuthPrincipalAttributes {
+public enum OAuthPrincipalAttribute {
 
 	EMAIL("email"),
 	GIVEN_NAME("given_name");
@@ -10,7 +10,7 @@ public enum OAuthPrincipalAttributes {
 	@Getter
 	private final String key;
 
-	OAuthPrincipalAttributes(String key) {
+	OAuthPrincipalAttribute(String key) {
 		this.key = key;
 	}
 }

@@ -2,15 +2,16 @@ package pl.mariuszk.enums;
 
 import lombok.Getter;
 
-public enum QueryParamKeys {
+public enum QueryParamKey {
 
 	CREATED("created"),
-	ERROR("error");
+	ERROR("error"),
+	SAVED("saved");
 
 	@Getter
 	private final String value;
 
-	QueryParamKeys(String value) {
+	QueryParamKey(String value) {
 		this.value = value;
 	}
 }

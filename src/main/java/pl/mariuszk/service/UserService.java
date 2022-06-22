@@ -7,6 +7,8 @@ import pl.mariuszk.repository.UserRepository;
 import pl.mariuszk.model.entity.UserEntity;
 import pl.mariuszk.model.frontend.UserDto;
 import pl.mariuszk.security.CustomOAuthUserPrincipal;
+import pl.mariuszk.security.ICustomUserDetails;
+import pl.mariuszk.service.security.SecurityService;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +16,7 @@ public class UserService {
 
 	private final PasswordEncoder encoder;
 	private final UserRepository userRepository;
+	private final SecurityService securityService;
 
 	public void registerNewUser(UserDto userDto) {
 		if (usernameExists(userDto.getUsername())) {
@@ -44,5 +47,15 @@ public class UserService {
 				.build();
 
 		userRepository.save(userEntity);
+	}
+
+	public UserEntity getUserByUsername(String username) {
+		return userRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalStateException("User" + username + " not found"));
+	}
+
+	public UserEntity getUserFromSecurityContext() {
+		ICustomUserDetails loggedUser = securityService.getAuthenticatedUser();
+		return getUserByUsername(loggedUser.getUsername());
 	}
 }

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import pl.mariuszk.security.CustomOAuthUserPrincipal;
 import pl.mariuszk.security.ICustomUserDetails;
 
-import static pl.mariuszk.enums.OAuthPrincipalAttributes.EMAIL;
-import static pl.mariuszk.enums.OAuthPrincipalAttributes.GIVEN_NAME;
+import static pl.mariuszk.enums.OAuthPrincipalAttribute.EMAIL;
+import static pl.mariuszk.enums.OAuthPrincipalAttribute.GIVEN_NAME;
 import static pl.mariuszk.enums.Route.LOG_IN;
 
 @Service

@@ -17,8 +17,8 @@ import pl.mariuszk.service.NotificationService;
 import java.util.List;
 import java.util.Map;
 
-import static pl.mariuszk.enums.QueryParamKeys.CREATED;
-import static pl.mariuszk.enums.QueryParamKeys.ERROR;
+import static pl.mariuszk.enums.QueryParamKey.CREATED;
+import static pl.mariuszk.enums.QueryParamKey.ERROR;
 import static pl.mariuszk.enums.Route.SIGN_IN;
 
 @Route("login")

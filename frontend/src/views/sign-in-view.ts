@@ -22,7 +22,7 @@ export class SignInView extends LitElement {
  <vaadin-text-field label="Login" id="username" type="text" required></vaadin-text-field>
  <vaadin-text-field label="Name" id="name" type="text" required></vaadin-text-field>
  <vaadin-password-field id="password" type="password" required label="Password"></vaadin-password-field>
- <vaadin-password-field id="passwordConfirm" type="password" label="Confirm password" invalid></vaadin-password-field>
+ <vaadin-password-field id="passwordConfirm" type="password" label="Confirm password" invalid required></vaadin-password-field>
  <vaadin-button theme="primary" id="btnSubmit" style="margin: var(--lumo-space-m);" tabindex="0">
    Sign in 
  </vaadin-button>

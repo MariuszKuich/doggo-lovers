@@ -24,7 +24,7 @@ import pl.mariuszk.service.UserService;
 import java.util.Collections;
 
 import static java.lang.Boolean.TRUE;
-import static pl.mariuszk.enums.QueryParamKeys.CREATED;
+import static pl.mariuszk.enums.QueryParamKey.CREATED;
 import static pl.mariuszk.enums.Route.LOG_IN;
 
 @Route("signin")
