@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 import pl.mariuszk.security.CustomOAuthUserPrincipal;
+import pl.mariuszk.security.ICustomUserDetails;
 
 import static pl.mariuszk.enums.OAuthPrincipalAttributes.EMAIL;
 import static pl.mariuszk.enums.OAuthPrincipalAttributes.GIVEN_NAME;
@@ -17,12 +18,12 @@ import static pl.mariuszk.enums.Route.LOG_IN;
 @Service
 public class SecurityService {
 
-	public UserDetails getAuthenticatedUser() {
+	public ICustomUserDetails getAuthenticatedUser() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Object principal = context.getAuthentication().getPrincipal();
 		//UsernamePasswordAuthentication
 		if (principal instanceof UserDetails) {
-			return (UserDetails) context.getAuthentication().getPrincipal();
+			return (ICustomUserDetails) context.getAuthentication().getPrincipal();
 		}
 		//OAuth2Authentication
 		if (principal instanceof DefaultOidcUser) {

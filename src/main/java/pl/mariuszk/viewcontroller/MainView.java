@@ -10,6 +10,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.mariuszk.security.CustomOAuthUserPrincipal;
+import pl.mariuszk.security.ICustomUserDetails;
 import pl.mariuszk.service.UserService;
 import pl.mariuszk.service.security.SecurityService;
 
@@ -37,14 +38,14 @@ public class MainView extends LitTemplate {
 	private Button btnVet;
 
 	public MainView(SecurityService securityService, UserService userService) {
-		Optional<UserDetails> loggedUser = Optional.ofNullable(securityService.getAuthenticatedUser());
+		Optional<ICustomUserDetails> loggedUser = Optional.ofNullable(securityService.getAuthenticatedUser());
 
 		loggedUser.ifPresent(lu -> {
 			if (lu instanceof CustomOAuthUserPrincipal) {
 				userService.registerNewOAuthUserIfNecessary((CustomOAuthUserPrincipal) lu);
 			}
 		});
-		loggedUser.ifPresent(lu -> hWelcome.setText("Welcome, " + lu.getUsername() + "!"));
+		loggedUser.ifPresent(lu -> hWelcome.setText("Hello, " + lu.getName() + "!"));
 
 		btnLogout.addClickListener(e -> loggedUser.ifPresent(lu -> securityService.logout()));
     }

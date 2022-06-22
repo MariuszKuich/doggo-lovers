@@ -3,12 +3,11 @@ package pl.mariuszk.security;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 @RequiredArgsConstructor
-public class CustomOAuthUserPrincipal implements UserDetails {
+public class CustomOAuthUserPrincipal implements ICustomUserDetails {
 
 	private final String username;
 	@Getter
