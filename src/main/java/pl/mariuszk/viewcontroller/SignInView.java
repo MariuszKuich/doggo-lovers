@@ -7,6 +7,7 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.template.Id;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -35,7 +36,7 @@ import static pl.mariuszk.enums.Route.LOG_IN;
 public class SignInView extends LitTemplate {
 
 	@Id("username")
-	private TextField username;
+	private EmailField username;
 	@Id("name")
 	private TextField name;
 	@Id("password")
