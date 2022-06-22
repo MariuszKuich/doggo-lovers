@@ -48,4 +48,8 @@ public class WalkService {
 
 		walkRepository.save(walkEntity);
 	}
+
+	public void updateWalk(WalkEntity walkEntity) {
+		walkRepository.save(walkEntity);
+	}
 }

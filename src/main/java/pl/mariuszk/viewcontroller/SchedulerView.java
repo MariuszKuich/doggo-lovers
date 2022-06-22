@@ -9,12 +9,14 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.ErrorEvent;
@@ -29,7 +31,6 @@ import pl.mariuszk.service.UserService;
 import pl.mariuszk.service.WalkService;
 
 import javax.annotation.security.PermitAll;
-
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -117,6 +118,11 @@ public class SchedulerView extends LitTemplate {
         gridWalksAssigned.addColumn(e -> e.isConfirmed() ? "Yes" : "No").setHeader("You confirmed the walk");
         gridWalksAssigned.addColumn(e -> e.getDog().getName()).setHeader("Dog to walk");
         gridWalksAssigned.addColumn(e -> DATE_TIME_FORMATTER.format(e.getCreatedDate())).setHeader("Created at");
+        gridWalksAssigned.addColumn(new ComponentRenderer<>(gridItem -> {
+            Button button = new Button("Confirm", e -> confirmWalk(gridItem, userEntity.getId()));
+            button.setEnabled(!gridItem.isConfirmed());
+            return new HorizontalLayout(button);
+        })).setHeader("Confirm Walk");
         gridWalksAssigned.getColumns().forEach(col -> col.setAutoWidth(true));
         updateWalksAssigned(userEntity.getId());
     }
@@ -127,5 +133,11 @@ public class SchedulerView extends LitTemplate {
 
     private void updateWalksAssigned(Long userId) {
         gridWalksAssigned.setItems(walkService.getWalksAssignedToUser(userId));
+    }
+
+    private void confirmWalk(WalkEntity walkEntity, Long userId) {
+        walkEntity.setConfirmed(true);
+        walkService.updateWalk(walkEntity);
+        updateWalksAssigned(userId);
     }
 }
