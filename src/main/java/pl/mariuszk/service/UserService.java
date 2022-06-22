@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.mariuszk.repository.UserRepository;
 import pl.mariuszk.model.entity.UserEntity;
 import pl.mariuszk.model.frontend.UserDto;
+import pl.mariuszk.security.CustomOAuthUserPrincipal;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,7 @@ public class UserService {
 		UserEntity userEntity = UserEntity.builder()
 				.username(userDto.getUsername())
 				.password(encoder.encode(userDto.getPassword()))
+				.name(userDto.getName())
 				.build();
 
 		userRepository.save(userEntity);
@@ -31,13 +33,14 @@ public class UserService {
 		return userRepository.findByUsername(username).isPresent();
 	}
 
-	public void registerNewOAuthUserIfNecessary(String username) {
-		if (usernameExists(username)) {
+	public void registerNewOAuthUserIfNecessary(CustomOAuthUserPrincipal userPrincipal) {
+		if (usernameExists(userPrincipal.getUsername())) {
 			return;
 		}
 
 		UserEntity userEntity = UserEntity.builder()
-				.username(username)
+				.username(userPrincipal.getUsername())
+				.name(userPrincipal.getName())
 				.build();
 
 		userRepository.save(userEntity);

@@ -36,6 +36,8 @@ public class SignInView extends LitTemplate {
 
 	@Id("username")
 	private TextField username;
+	@Id("name")
+	private TextField name;
 	@Id("password")
 	private PasswordField password;
 	@Id("btnSubmit")

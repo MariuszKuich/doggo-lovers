@@ -1,5 +1,6 @@
 package pl.mariuszk.security;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,8 @@ import java.util.Collection;
 public class CustomOAuthUserPrincipal implements UserDetails {
 
 	private final String username;
+	@Getter
+	private final String name;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

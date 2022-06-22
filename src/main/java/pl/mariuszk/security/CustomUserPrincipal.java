@@ -46,4 +46,8 @@ public class CustomUserPrincipal implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+
+	public String getName() {
+		return userEntity.getName();
+	}
 }

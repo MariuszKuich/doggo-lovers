@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import pl.mariuszk.security.CustomOAuthUserPrincipal;
 
 import static pl.mariuszk.enums.OAuthPrincipalAttributes.EMAIL;
+import static pl.mariuszk.enums.OAuthPrincipalAttributes.GIVEN_NAME;
 import static pl.mariuszk.enums.Route.LOG_IN;
 
 @Service
@@ -26,7 +27,8 @@ public class SecurityService {
 		//OAuth2Authentication
 		if (principal instanceof DefaultOidcUser) {
 			String username = ((DefaultOidcUser) principal).getAttribute(EMAIL.getKey());
-			return new CustomOAuthUserPrincipal(username);
+			String name = ((DefaultOidcUser) principal).getAttribute(GIVEN_NAME.getKey());
+			return new CustomOAuthUserPrincipal(username, name);
 		}
 		// Anonymous or no authentication.
 		return null;

@@ -33,7 +33,7 @@ public class MainView extends LitTemplate {
 
 		loggedUser.ifPresent(lu -> {
 			if (lu instanceof CustomOAuthUserPrincipal) {
-				userService.registerNewOAuthUserIfNecessary(lu.getUsername());
+				userService.registerNewOAuthUserIfNecessary((CustomOAuthUserPrincipal) lu);
 			}
 		});
 		loggedUser.ifPresent(lu -> lblUsername.setValue(lu.getUsername()));
