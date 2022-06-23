@@ -29,6 +29,7 @@ import java.util.Optional;
 import static pl.mariuszk.enums.QueryParamKey.SAVED;
 import static pl.mariuszk.enums.Route.DOG_DATA;
 import static pl.mariuszk.enums.Route.SCHEDULER;
+import static pl.mariuszk.enums.Route.VET_HISTORY;
 
 @Route("")
 @PageTitle("Doggo Lovers")
@@ -71,6 +72,7 @@ public class MainView extends LitTemplate implements BeforeEnterObserver {
 		btnLogout.addClickListener(e -> securityService.logout());
 		btnEditSave.addClickListener(e -> UI.getCurrent().navigate(DOG_DATA.getUrl()));
 		btnScheduler.addClickListener(e -> UI.getCurrent().navigate(SCHEDULER.getUrl()));
+		btnVet.addClickListener(e -> UI.getCurrent().navigate(VET_HISTORY.getUrl()));
     }
 
 	private UserEntity getUserInfo() {
