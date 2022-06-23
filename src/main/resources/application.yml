@@ -23,10 +23,21 @@ spring:
       client:
         registration:
           google:
-            clientId: 1066355102789-o0a8rmjptilsoqhoijfmechqp9869rv2.apps.googleusercontent.com
-            clientSecret: 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
+            clientId:
+            clientSecret:
           scope:
             - email
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 vaadin:
   launch-browser: false
   whitelisted-packages: com.vaadin,org.vaadin,dev.hilla,com.example.application

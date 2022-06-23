@@ -1,4 +1,4 @@
-package pl.mariuszk.security;
+package pl.mariuszk.configuration;
 
 import com.vaadin.flow.spring.security.VaadinWebSecurityConfigurerAdapter;
 import lombok.RequiredArgsConstructor;

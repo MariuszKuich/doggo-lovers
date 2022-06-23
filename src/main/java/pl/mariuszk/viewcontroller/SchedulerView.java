@@ -20,6 +20,8 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.ErrorEvent;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.TaskScheduler;
 import pl.mariuszk.exception.CustomErrorHandler;
 import pl.mariuszk.model.entity.DogEntity;
 import pl.mariuszk.model.entity.UserEntity;
@@ -29,8 +31,11 @@ import pl.mariuszk.service.DogService;
 import pl.mariuszk.service.NotificationService;
 import pl.mariuszk.service.UserService;
 import pl.mariuszk.service.WalkService;
+import pl.mariuszk.service.email.EmailService;
 
 import javax.annotation.security.PermitAll;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -41,6 +46,7 @@ import static pl.mariuszk.enums.Route.MAIN_VIEW;
 @PermitAll
 @Tag("scheduler-view")
 @JsModule("./src/views/scheduler-view.ts")
+@Slf4j
 public class SchedulerView extends LitTemplate {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");;
@@ -63,13 +69,17 @@ public class SchedulerView extends LitTemplate {
     private Grid<WalkEntity> gridUsersWalks;
 
     private final WalkService walkService;
+    private final EmailService emailService;
+    private final TaskScheduler taskScheduler;
 
     Binder<WalkDto> binderForm = new BeanValidationBinder<>(WalkDto.class);
     private final WalkDto walkDto = new WalkDto();
 
     public SchedulerView(DogService dogService, UserService userService, WalkService walkService, CustomErrorHandler errorHandler,
-                         NotificationService notificationService) {
+                         NotificationService notificationService, EmailService emailService, TaskScheduler taskScheduler) {
         this.walkService = walkService;
+        this.emailService = emailService;
+        this.taskScheduler = taskScheduler;
 
         UserEntity userEntity = userService.getUserFromSecurityContext();
         DogEntity dogEntity = dogService.findByOwnerIdOrThrow(userEntity.getId());
@@ -139,5 +149,34 @@ public class SchedulerView extends LitTemplate {
         walkEntity.setConfirmed(true);
         walkService.updateWalk(walkEntity);
         updateWalksAssigned(userId);
+
+        scheduleSendingReminder(walkEntity);
+    }
+
+    private void  scheduleSendingReminder(WalkEntity walkEntity) {
+        LocalDateTime emailSendTime = walkEntity.getWalkDate().minusHours(1L);
+        if (LocalDateTime.now().isAfter(emailSendTime)) {
+            return;
+        }
+        String walkDate = DATE_TIME_FORMATTER.format(walkEntity.getWalkDate());
+
+        String addressee = walkEntity.getAssignee().getUsername();
+        String subject = "Doggo Lovers - walk " + walkDate;
+        String text = String.format("REMINDER! You agreed to walk %s, date: %s", walkEntity.getDog().getName(), walkDate);
+
+        log.info("Scheduling sending email to {} at: {}", addressee, emailSendTime);
+        taskScheduler.schedule(
+                () -> tryToSendMessage(addressee, subject, text),
+                Timestamp.valueOf(emailSendTime)
+        );
+    }
+
+    private void tryToSendMessage(String addressee, String subject, String text) {
+        try {
+            emailService.sendMessage(addressee, subject, text);
+            log.info("Mail to {} sent: {}", addressee, LocalDateTime.now());
+        } catch (Exception ex) {
+            log.error("Error during sending email to {}: {}", addressee, ex.getMessage());
+        }
     }
 }
