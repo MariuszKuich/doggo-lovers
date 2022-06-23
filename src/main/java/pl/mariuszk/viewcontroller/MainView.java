@@ -28,6 +28,7 @@ import java.util.Optional;
 
 import static pl.mariuszk.enums.QueryParamKey.SAVED;
 import static pl.mariuszk.enums.Route.DOG_DATA;
+import static pl.mariuszk.enums.Route.GALLERY;
 import static pl.mariuszk.enums.Route.SCHEDULER;
 import static pl.mariuszk.enums.Route.VET_HISTORY;
 
@@ -73,6 +74,7 @@ public class MainView extends LitTemplate implements BeforeEnterObserver {
 		btnEditSave.addClickListener(e -> UI.getCurrent().navigate(DOG_DATA.getUrl()));
 		btnScheduler.addClickListener(e -> UI.getCurrent().navigate(SCHEDULER.getUrl()));
 		btnVet.addClickListener(e -> UI.getCurrent().navigate(VET_HISTORY.getUrl()));
+		btnGallery.addClickListener(e -> UI.getCurrent().navigate(GALLERY.getUrl()));
     }
 
 	private UserEntity getUserInfo() {

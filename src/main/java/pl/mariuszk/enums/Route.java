@@ -8,7 +8,8 @@ public enum Route {
 	DOG_DATA("/dogdata"),
 	MAIN_VIEW("/"),
 	SCHEDULER("/scheduler"),
-	VET_HISTORY("/vet");
+	VET_HISTORY("/vet"),
+	GALLERY("/gallery");
 	@Getter
 	private final String url;
 
