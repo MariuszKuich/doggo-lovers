@@ -55,7 +55,7 @@ public class VetView extends LitTemplate {
 	private final VetHistoryService vetHistoryService;
 
 	Binder<VetHistoryEntity> binder = new BeanValidationBinder<>(VetHistoryEntity.class);
-	private final VetHistoryEntity vetHistoryEntity = new VetHistoryEntity();
+	private VetHistoryEntity vetHistoryEntity;
 
 	public VetView(VetHistoryService vetHistoryService, UserService userService, DogService dogService, ErrorHandler errorHandler) {
 		this.vetHistoryService = vetHistoryService;
@@ -76,6 +76,7 @@ public class VetView extends LitTemplate {
 
 		btnAdd.addClickListener(e -> {
 			try {
+				vetHistoryEntity = new VetHistoryEntity();
 				binder.writeBean(vetHistoryEntity);
 				vetHistoryEntity.setDog(dogEntity);
 				vetHistoryService.addVisit(vetHistoryEntity);

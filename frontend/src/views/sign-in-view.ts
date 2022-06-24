@@ -27,6 +27,9 @@ export class SignInView extends LitElement {
  <vaadin-button theme="primary" id="btnSubmit" style="margin: var(--lumo-space-m);" tabindex="0">
    Sign in 
  </vaadin-button>
+ <vaadin-button theme="secondary error" id="btnCancel" tabindex="0">
+  Cancel
+ </vaadin-button>
 </vaadin-vertical-layout>
 `;
   }

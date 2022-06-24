@@ -45,6 +45,8 @@ public class SignInView extends LitTemplate {
 	private Button btnSubmit;
 	@Id("passwordConfirm")
 	private PasswordField passwordConfirm;
+	@Id("btnCancel")
+	private Button btnCancel;
 
 	Binder<UserDto> binder = new BeanValidationBinder<>(UserDto.class);
 	private final UserDto userDto = new UserDto();
@@ -68,6 +70,7 @@ public class SignInView extends LitTemplate {
 				errorHandler.error(new ErrorEvent(ex));
 			}
 		});
+		btnCancel.addClickListener(e -> UI.getCurrent().navigate(LOG_IN.getUrl()));
     }
 
 }
