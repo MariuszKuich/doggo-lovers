@@ -19,7 +19,7 @@ export class GalleryView extends LitElement {
     return html`
 <vaadin-vertical-layout style="width: 100%; height: 100%; align-items: center;">
  <h1>Dogs photos</h1>
- <vaadin-upload id="uploadFile" max-file-size="5 000 000" max-files="1"></vaadin-upload>
+ <vaadin-upload id="uploadFile" max-file-size="5 000 000" max-files="1" style="flex-shrink: 0;"></vaadin-upload>
  <vaadin-button theme="primary" id="btnSend" style="margin-top: var(--lumo-space-l);" tabindex="0">
    Send Photo 
  </vaadin-button>

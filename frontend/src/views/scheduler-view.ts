@@ -32,9 +32,9 @@ export class SchedulerView extends LitElement {
    Go back 
  </vaadin-button>
  <h2>Walks scheduled by you</h2>
- <vaadin-grid id="gridUsersWalks" is-attached style="height: 20%; flex-shrink: 0; flex-grow: 0;"></vaadin-grid>
+ <vaadin-grid id="gridUsersWalks" is-attached style="height: 40%; flex-shrink: 0; flex-grow: 0;"></vaadin-grid>
  <h2>Walks assigned to you</h2>
- <vaadin-grid id="gridWalksAssigned" is-attached style="height: 20%; padding: var(--lumo-space-l); flex-shrink: 0; flex-grow: 0;"></vaadin-grid>
+ <vaadin-grid id="gridWalksAssigned" is-attached style="height: 40%; padding: var(--lumo-space-l); flex-shrink: 0; flex-grow: 0;"></vaadin-grid>
 </vaadin-vertical-layout>
 `;
   }

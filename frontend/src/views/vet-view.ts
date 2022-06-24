@@ -32,7 +32,7 @@ export class VetView extends LitElement {
    Go back 
  </vaadin-button>
  <h3>Visits history</h3>
- <vaadin-grid id="gridHistory" style="flex-shrink: 0; flex-grow: 0; height: 30%;" is-attached></vaadin-grid>
+ <vaadin-grid id="gridHistory" style="flex-shrink: 0; flex-grow: 0; height: 40%;" is-attached></vaadin-grid>
 </vaadin-vertical-layout>
 `;
   }
